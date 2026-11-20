@@ -1,0 +1,745 @@
+{
+ "folders": {
+  "i1/in-01": {
+   "src": "Important 1/Indoor/1",
+   "files": 10,
+   "product": "embossed-crest-polo",
+   "colour": "Black"
+  },
+  "i1/in-05": {
+   "src": "Important 1/Indoor/5",
+   "files": 10,
+   "product": "embossed-crest-polo",
+   "colour": "Charcoal"
+  },
+  "i1/in-06": {
+   "src": "Important 1/Indoor/6",
+   "files": 10,
+   "product": "embossed-crest-polo",
+   "colour": "Dark Red"
+  },
+  "i1/in-07": {
+   "src": "Important 1/Indoor/7",
+   "files": 10,
+   "product": "embossed-crest-polo",
+   "colour": "Red"
+  },
+  "i1/in-28": {
+   "src": "Important 1/Indoor/28",
+   "files": 10,
+   "product": "embossed-crest-polo",
+   "colour": "Royal Blue"
+  },
+  "i1/out-07": {
+   "src": "Important 1/Outdoor/7",
+   "files": 5,
+   "product": "embossed-crest-polo",
+   "colour": "Royal Blue"
+  },
+  "i1/in-02": {
+   "src": "Important 1/Indoor/2",
+   "files": 10,
+   "product": "mandarin-collar-polo",
+   "colour": "Navy"
+  },
+  "i1/in-03": {
+   "src": "Important 1/Indoor/3",
+   "files": 10,
+   "product": "mandarin-collar-polo",
+   "colour": "Brick Red"
+  },
+  "i1/in-04": {
+   "src": "Important 1/Indoor/4",
+   "files": 11,
+   "product": "mandarin-collar-polo",
+   "colour": "Bottle Green"
+  },
+  "i1/in-08": {
+   "src": "Important 1/Indoor/8",
+   "files": 11,
+   "product": "mandarin-collar-polo",
+   "colour": "Light Grey Melange"
+  },
+  "i1/in-18": {
+   "src": "Important 1/Indoor/18",
+   "files": 10,
+   "product": "mandarin-collar-polo",
+   "colour": "Aqua Green"
+  },
+  "i1/out-17": {
+   "src": "Important 1/Outdoor/17",
+   "files": 5,
+   "product": "mandarin-collar-polo",
+   "colour": "Aqua Green"
+  },
+  "i1/in-25": {
+   "src": "Important 1/Indoor/25",
+   "files": 10,
+   "product": "mandarin-collar-polo",
+   "colour": "Black"
+  },
+  "i1/out-04": {
+   "src": "Important 1/Outdoor/4",
+   "files": 5,
+   "product": "mandarin-collar-polo",
+   "colour": "Black"
+  },
+  "i1/in-09": {
+   "src": "Important 1/Indoor/9",
+   "files": 10,
+   "product": "crest-block-polo",
+   "colour": "Red / Navy / Ivory"
+  },
+  "i1/out-09": {
+   "src": "Important 1/Outdoor/9",
+   "files": 5,
+   "product": "crest-block-polo",
+   "colour": "Red / Navy / Ivory"
+  },
+  "i1/in-10": {
+   "src": "Important 1/Indoor/10",
+   "files": 10,
+   "product": "crest-block-polo",
+   "colour": "Charcoal / Mustard / Ivory"
+  },
+  "i1/out-12": {
+   "src": "Important 1/Outdoor/12",
+   "files": 5,
+   "product": "crest-block-polo",
+   "colour": "Charcoal / Mustard / Ivory"
+  },
+  "i1/in-11": {
+   "src": "Important 1/Indoor/11",
+   "files": 10,
+   "product": "diagonal-block-polo",
+   "colour": "Red / Ivory / Navy"
+  },
+  "i1/out-16": {
+   "src": "Important 1/Outdoor/16",
+   "files": 5,
+   "product": "diagonal-block-polo",
+   "colour": "Red / Ivory / Navy"
+  },
+  "i1/in-17": {
+   "src": "Important 1/Indoor/17",
+   "files": 10,
+   "product": "diagonal-block-polo",
+   "colour": "Rose / Ivory / Navy"
+  },
+  "i1/out-13": {
+   "src": "Important 1/Outdoor/13",
+   "files": 5,
+   "product": "diagonal-block-polo",
+   "colour": "Rose / Ivory / Navy"
+  },
+  "i1/in-12": {
+   "src": "Important 1/Indoor/12",
+   "files": 9,
+   "product": "classic-white-polo",
+   "colour": "White"
+  },
+  "i1/in-13": {
+   "src": "Important 1/Indoor/13",
+   "files": 12,
+   "product": "v-neck-t-shirt",
+   "colour": "White"
+  },
+  "i1/in-14": {
+   "src": "Important 1/Indoor/14",
+   "files": 10,
+   "product": "crew-neck-t-shirt",
+   "colour": "White"
+  },
+  "i1/in-15": {
+   "src": "Important 1/Indoor/15",
+   "files": 10,
+   "product": "core-shorts-white",
+   "colour": "White"
+  },
+  "i1/in-16": {
+   "src": "Important 1/Indoor/16",
+   "files": 10,
+   "product": "core-jogger-white",
+   "colour": "White"
+  },
+  "i1/in-19": {
+   "src": "Important 1/Indoor/19",
+   "files": 9,
+   "product": "sleeve-stripe-polo",
+   "colour": "Aqua Green"
+  },
+  "i1/out-14": {
+   "src": "Important 1/Outdoor/14",
+   "files": 5,
+   "product": "sleeve-stripe-polo",
+   "colour": "Aqua Green"
+  },
+  "i1/in-24": {
+   "src": "Important 1/Indoor/24",
+   "files": 10,
+   "product": "sleeve-stripe-polo",
+   "colour": "Charcoal"
+  },
+  "i1/out-02": {
+   "src": "Important 1/Outdoor/2",
+   "files": 5,
+   "product": "sleeve-stripe-polo",
+   "colour": "Charcoal"
+  },
+  "i1/in-20": {
+   "src": "Important 1/Indoor/20",
+   "files": 10,
+   "product": "number-8-crest-polo",
+   "colour": "Coral"
+  },
+  "i1/out-15": {
+   "src": "Important 1/Outdoor/15",
+   "files": 5,
+   "product": "number-8-crest-polo",
+   "colour": "Coral"
+  },
+  "i1/in-21": {
+   "src": "Important 1/Indoor/21",
+   "files": 10,
+   "product": "authentic-tonal-polo",
+   "colour": "Navy"
+  },
+  "i1/out-06": {
+   "src": "Important 1/Outdoor/6",
+   "files": 5,
+   "product": "authentic-tonal-polo",
+   "colour": "Navy"
+  },
+  "i1/in-22": {
+   "src": "Important 1/Indoor/22",
+   "files": 10,
+   "product": "rugby-polo",
+   "colour": "Bottle Green"
+  },
+  "i1/out-05": {
+   "src": "Important 1/Outdoor/5",
+   "files": 5,
+   "product": "rugby-polo",
+   "colour": "Bottle Green"
+  },
+  "i1/in-23": {
+   "src": "Important 1/Indoor/23",
+   "files": 10,
+   "product": "rugby-league-band-polo",
+   "colour": "Black / Ivory / Charcoal"
+  },
+  "i1/out-20": {
+   "src": "Important 1/Outdoor/20",
+   "files": 5,
+   "product": "rugby-league-band-polo",
+   "colour": "Black / Ivory / Charcoal"
+  },
+  "i1/in-31": {
+   "src": "Important 1/Indoor/31",
+   "files": 10,
+   "product": "rugby-league-band-polo",
+   "colour": "Grey / Ivory / Black"
+  },
+  "i1/out-01": {
+   "src": "Important 1/Outdoor/1",
+   "files": 5,
+   "product": "rugby-league-band-polo",
+   "colour": "Grey / Ivory / Black"
+  },
+  "i1/in-26": {
+   "src": "Important 1/Indoor/26",
+   "files": 10,
+   "product": "polo-league-polo",
+   "colour": "Red / Royal Blue"
+  },
+  "i1/out-18": {
+   "src": "Important 1/Outdoor/18",
+   "files": 5,
+   "product": "polo-league-polo",
+   "colour": "Red / Royal Blue"
+  },
+  "i1/in-30": {
+   "src": "Important 1/Indoor/30",
+   "files": 10,
+   "product": "polo-league-polo",
+   "colour": "Black / Ivory"
+  },
+  "i1/out-03": {
+   "src": "Important 1/Outdoor/3",
+   "files": 5,
+   "product": "polo-league-polo",
+   "colour": "Black / Ivory"
+  },
+  "i1/in-27": {
+   "src": "Important 1/Indoor/27",
+   "files": 10,
+   "product": "vertical-split-polo",
+   "colour": "Black / Charcoal"
+  },
+  "i1/out-19": {
+   "src": "Important 1/Outdoor/19",
+   "files": 5,
+   "product": "vertical-split-polo",
+   "colour": "Black / Charcoal"
+  },
+  "i1/in-29": {
+   "src": "Important 1/Indoor/29",
+   "files": 10,
+   "product": "vertical-split-polo",
+   "colour": "Red / Navy"
+  },
+  "i1/out-11": {
+   "src": "Important 1/Outdoor/11",
+   "files": 5,
+   "product": "vertical-split-polo",
+   "colour": "Red / Navy"
+  },
+  "i1/in-32": {
+   "src": "Important 1/Indoor/32",
+   "files": 10,
+   "product": "sash-polo",
+   "colour": "Bottle Green"
+  },
+  "i1/out-08": {
+   "src": "Important 1/Outdoor/8",
+   "files": 5,
+   "product": "sash-polo",
+   "colour": "Bottle Green"
+  },
+  "i1/in-33": {
+   "src": "Important 1/Indoor/33",
+   "files": 10,
+   "product": "sash-polo",
+   "colour": "Butter Yellow"
+  },
+  "i1/out-10": {
+   "src": "Important 1/Outdoor/10",
+   "files": 5,
+   "product": "sash-polo",
+   "colour": "Butter Yellow"
+  },
+  "i2/core-01": {
+   "src": "Important 2/Core/1",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Light Grey Melange"
+  },
+  "i2/core-02": {
+   "src": "Important 2/Core/2",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "White"
+  },
+  "i2/core-03": {
+   "src": "Important 2/Core/3",
+   "files": 5,
+   "product": "core-polo",
+   "colour": "Beige"
+  },
+  "i2/core-04": {
+   "src": "Important 2/Core/4",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Sky Blue"
+  },
+  "i2/core-05": {
+   "src": "Important 2/Core/5",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Coral"
+  },
+  "i2/core-06": {
+   "src": "Important 2/Core/6",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Red"
+  },
+  "i2/core-07": {
+   "src": "Important 2/Core/7",
+   "files": 5,
+   "product": "core-polo",
+   "colour": "Cobalt Blue"
+  },
+  "i2/core-08": {
+   "src": "Important 2/Core/8",
+   "files": 5,
+   "product": "core-polo",
+   "colour": "Rose Pink"
+  },
+  "i2/core-09": {
+   "src": "Important 2/Core/9",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Sage Green"
+  },
+  "i2/core-10": {
+   "src": "Important 2/Core/10",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Navy"
+  },
+  "i2/core-11": {
+   "src": "Important 2/Core/11",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Maroon"
+  },
+  "i2/core-12": {
+   "src": "Important 2/Core/12",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Grey Melange"
+  },
+  "i2/core-13": {
+   "src": "Important 2/Core/13",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Marigold"
+  },
+  "i2/core-14": {
+   "src": "Important 2/Core/14",
+   "files": 5,
+   "product": "core-polo",
+   "colour": "Mustard"
+  },
+  "i2/core-15": {
+   "src": "Important 2/Core/15",
+   "files": 4,
+   "product": "core-polo",
+   "colour": "Teal"
+  },
+  "i2/core-16": {
+   "src": "Important 2/Core/16",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Raspberry"
+  },
+  "i2/core-17": {
+   "src": "Important 2/Core/17",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Charcoal Melange"
+  },
+  "i2/core-18": {
+   "src": "Important 2/Core/18",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Brown"
+  },
+  "i2/core-19": {
+   "src": "Important 2/Core/19",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Rust Red"
+  },
+  "i2/core-20": {
+   "src": "Important 2/Core/20",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Navy Melange"
+  },
+  "i2/core-21": {
+   "src": "Important 2/Core/21",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Black"
+  },
+  "i2/core-22": {
+   "src": "Important 2/Core/22",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Bottle Green"
+  },
+  "i2/core-23": {
+   "src": "Important 2/Core/23",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Ecru"
+  },
+  "i2/core-24": {
+   "src": "Important 2/Core/24",
+   "files": 6,
+   "product": "core-polo",
+   "colour": "Mint"
+  },
+  "i2/hf-01": {
+   "src": "Important 2/High Fashion/1",
+   "files": 6,
+   "product": "est-1982-band-polo",
+   "colour": "Navy / Red / White"
+  },
+  "i2/hf-04": {
+   "src": "Important 2/High Fashion/4",
+   "files": 6,
+   "product": "est-1982-band-polo",
+   "colour": "Sky Blue / Navy / White"
+  },
+  "i2/hf-02": {
+   "src": "Important 2/High Fashion/2",
+   "files": 6,
+   "product": "tri-block-emblem-polo",
+   "colour": "Sky Blue / Ivory / Navy"
+  },
+  "i2/hf-03": {
+   "src": "Important 2/High Fashion/3",
+   "files": 6,
+   "product": "tri-block-emblem-polo",
+   "colour": "Rose / Navy / Grey"
+  },
+  "i2/hf-09": {
+   "src": "Important 2/High Fashion/9",
+   "files": 6,
+   "product": "tri-block-emblem-polo",
+   "colour": "Coral / Ivory / Navy"
+  },
+  "i2/hf-05": {
+   "src": "Important 2/High Fashion/5",
+   "files": 6,
+   "product": "authentic-team-sports-polo",
+   "colour": "Mint"
+  },
+  "i2/hf-06": {
+   "src": "Important 2/High Fashion/6",
+   "files": 6,
+   "product": "diagonal-crest-polo",
+   "colour": "Navy / Red / Ecru"
+  },
+  "i2/hf-08": {
+   "src": "Important 2/High Fashion/8",
+   "files": 6,
+   "product": "diagonal-crest-polo",
+   "colour": "Navy / Red / Grey"
+  },
+  "i2/hf-12": {
+   "src": "Important 2/High Fashion/12",
+   "files": 6,
+   "product": "diagonal-crest-polo",
+   "colour": "Maroon / Ivory"
+  },
+  "i2/hf-16": {
+   "src": "Important 2/High Fashion/16",
+   "files": 6,
+   "product": "diagonal-crest-polo",
+   "colour": "Black / Ivory"
+  },
+  "i2/hf-07": {
+   "src": "Important 2/High Fashion/7",
+   "files": 6,
+   "product": "crest-band-polo",
+   "colour": "Ivory / Navy"
+  },
+  "i2/hf-10": {
+   "src": "Important 2/High Fashion/10",
+   "files": 6,
+   "product": "chest-panel-crest-polo",
+   "colour": "Mint / Navy"
+  },
+  "i2/hf-11": {
+   "src": "Important 2/High Fashion/11",
+   "files": 6,
+   "product": "striped-panel-crest-polo",
+   "colour": "Red / Navy"
+  },
+  "i2/hf-13": {
+   "src": "Important 2/High Fashion/13",
+   "files": 6,
+   "product": "striped-panel-crest-polo",
+   "colour": "Bottle Green / Navy"
+  },
+  "i2/hf-14": {
+   "src": "Important 2/High Fashion/14",
+   "files": 6,
+   "product": "authentic-sports-polo",
+   "colour": "Maroon / Navy"
+  },
+  "i2/hf-15": {
+   "src": "Important 2/High Fashion/15",
+   "files": 6,
+   "product": "authentic-sports-polo",
+   "colour": "Bottle Green / Navy"
+  },
+  "i2/cf-01": {
+   "src": "Important 2/core fashion/1",
+   "files": 6,
+   "product": "crest-tipped-polo",
+   "colour": "Coral"
+  },
+  "i2/cf-02": {
+   "src": "Important 2/core fashion/2",
+   "files": 6,
+   "product": "crest-tipped-polo",
+   "colour": "Sky Blue"
+  },
+  "i2/cf-04": {
+   "src": "Important 2/core fashion/4",
+   "files": 6,
+   "product": "crest-tipped-polo",
+   "colour": "Rose"
+  },
+  "i2/cf-06": {
+   "src": "Important 2/core fashion/6",
+   "files": 6,
+   "product": "crest-tipped-polo",
+   "colour": "Mint"
+  },
+  "i2/cf-08": {
+   "src": "Important 2/core fashion/8",
+   "files": 6,
+   "product": "crest-tipped-polo",
+   "colour": "Pale Blue"
+  },
+  "i2/cf-17": {
+   "src": "Important 2/core fashion/17",
+   "files": 6,
+   "product": "crest-tipped-polo",
+   "colour": "Cream"
+  },
+  "i2/cf-03": {
+   "src": "Important 2/core fashion/3",
+   "files": 6,
+   "product": "sleeve-band-crest-polo",
+   "colour": "Grey Melange"
+  },
+  "i2/cf-14": {
+   "src": "Important 2/core fashion/14",
+   "files": 6,
+   "product": "sleeve-band-crest-polo",
+   "colour": "Red"
+  },
+  "i2/cf-22": {
+   "src": "Important 2/core fashion/22",
+   "files": 6,
+   "product": "sleeve-band-crest-polo",
+   "colour": "Navy"
+  },
+  "i2/cf-23": {
+   "src": "Important 2/core fashion/23",
+   "files": 6,
+   "product": "sleeve-band-crest-polo",
+   "colour": "Charcoal"
+  },
+  "i2/cf-05": {
+   "src": "Important 2/core fashion/5",
+   "files": 5,
+   "product": "number-8-stripe-polo",
+   "colour": "Light Grey"
+  },
+  "i2/cf-12": {
+   "src": "Important 2/core fashion/12",
+   "files": 6,
+   "product": "number-8-stripe-polo",
+   "colour": "Silver Grey"
+  },
+  "i2/cf-15": {
+   "src": "Important 2/core fashion/15",
+   "files": 6,
+   "product": "number-8-stripe-polo",
+   "colour": "Marigold"
+  },
+  "i2/cf-07": {
+   "src": "Important 2/core fashion/7",
+   "files": 6,
+   "product": "side-panel-crest-polo",
+   "colour": "Marigold"
+  },
+  "i2/cf-25": {
+   "src": "Important 2/core fashion/25",
+   "files": 6,
+   "product": "side-panel-crest-polo",
+   "colour": "Charcoal / Mustard"
+  },
+  "i2/cf-09": {
+   "src": "Important 2/core fashion/9",
+   "files": 6,
+   "product": "shoulder-block-crest-polo",
+   "colour": "Rose / Light Grey"
+  },
+  "i2/cf-10": {
+   "src": "Important 2/core fashion/10",
+   "files": 6,
+   "product": "number-8-shoulder-polo",
+   "colour": "Ivory / Navy"
+  },
+  "i2/cf-11": {
+   "src": "Important 2/core fashion/11",
+   "files": 6,
+   "product": "equestrian-crest-polo",
+   "colour": "Red"
+  },
+  "i2/cf-13": {
+   "src": "Important 2/core fashion/13",
+   "files": 6,
+   "product": "equestrian-crest-polo",
+   "colour": "Brown"
+  },
+  "i2/cf-16": {
+   "src": "Important 2/core fashion/16",
+   "files": 6,
+   "product": "shield-crest-polo",
+   "colour": "Black"
+  },
+  "i2/cf-21": {
+   "src": "Important 2/core fashion/21",
+   "files": 6,
+   "product": "shield-crest-polo",
+   "colour": "Bottle Green"
+  },
+  "i2/cf-26": {
+   "src": "Important 2/core fashion/26",
+   "files": 6,
+   "product": "shield-crest-polo",
+   "colour": "Maroon"
+  },
+  "i2/cf-18": {
+   "src": "Important 2/core fashion/18",
+   "files": 6,
+   "product": "contrast-sleeve-crest-polo",
+   "colour": "Navy / Cobalt"
+  },
+  "i2/cf-19": {
+   "src": "Important 2/core fashion/19",
+   "files": 6,
+   "product": "chest-band-polo",
+   "colour": "Black / Charcoal"
+  },
+  "i2/cf-20": {
+   "src": "Important 2/core fashion/20",
+   "files": 6,
+   "product": "laurel-crest-polo",
+   "colour": "Rust Red"
+  },
+  "i2/cf-24": {
+   "src": "Important 2/core fashion/24",
+   "files": 6,
+   "product": "laurel-crest-polo",
+   "colour": "Navy Melange"
+  }
+ },
+ "excluded": [
+  [
+   "Important 1/Indoor/4/IMGL0985.JPG",
+   "product-label photograph"
+  ],
+  [
+   "Important 1/Indoor/8/IMGL1200.JPG",
+   "product-label photograph"
+  ]
+ ],
+ "unreadable": [
+  [
+   "Important 2/Core/15/_88A6978 copy.jpg",
+   "UnidentifiedImageError"
+  ],
+  [
+   "Important 2/Core/15/_88A6982 copy.jpg",
+   "UnidentifiedImageError"
+  ]
+ ],
+ "duplicate_folders": [
+  [
+   "Important 2/Core/19-1",
+   "byte-identical copy of Important 2/Core/23"
+  ]
+ ],
+ "jobs": 819
+}

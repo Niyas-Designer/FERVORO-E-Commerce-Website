@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+.DS_Store
+~ai-*.tmp
+*.log
+
+# Original source photographs (about 2.4 GB). Not used by the site at runtime: the site serves the optimised copies in frontend/public/catalog. Kept on disk, excluded from Git and from deployment.
+frontend/public/Important 1/
+frontend/public/Important 2/

@@ -1,0 +1,38 @@
+{
+  "name": "fervoro-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "test:e2e": "node e2e/nav.e2e.mjs",
+    "test:e2e:hero": "node e2e/hero.e2e.mjs",
+    "test:e2e:footer": "node e2e/footer.e2e.mjs",
+    "test:e2e:categories": "node e2e/categories.e2e.mjs",
+    "test:e2e:motion": "node e2e/motion.e2e.mjs",
+    "test:e2e:collections": "node e2e/collections.e2e.mjs",
+    "test:e2e:collection-page": "node e2e/collection-page.e2e.mjs",
+    "test:e2e:shop": "node e2e/shop.e2e.mjs",
+    "test:e2e:sidebar": "node e2e/sidebar.e2e.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/playfair-display": "^5.3.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.4",
+    "@vitejs/plugin-react": "^6.2.1",
+    "eslint": "^10.14.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "globals": "^17.14.0",
+    "tailwindcss": "^4.3.4",
+    "vite": "^8.3.5"
+  }
+}

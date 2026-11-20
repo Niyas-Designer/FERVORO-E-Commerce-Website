@@ -1,0 +1,27 @@
+{
+  "name": "fervoro-ecommerce",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FERVORO E-Commerce Website \u2014 full-stack monorepo (React + Vite + Tailwind frontend, Express backend)",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,green \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w backend",
+    "lint": "npm run lint -w frontend",
+    "test": "npm run test -w backend",
+    "images": "python3 scripts/build-nav-images.py",
+    "images:hero": "python3 scripts/build-hero-images.py",
+    "images:categories": "python3 scripts/build-category-images.py",
+    "videos:motion": "python3 scripts/build-motion-videos.py"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6"
+  }
+}

@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#11302a" />
+    <meta name="description" content="FERVORO — premium men's fashion. Where Style Becomes Signature." />
+    <link rel="icon" type="image/svg+xml" href="/browser%20icon.svg" />
+    <!-- Hero LCP image: preload exactly the variant the browser will pick (same media split as the <picture>) -->
+    <link rel="preload" as="image" type="image/webp" media="(max-width: 639px), (max-aspect-ratio: 1/1)"
+      imagesrcset="/images/hero/hero-polo-portrait-480.webp 480w, /images/hero/hero-polo-portrait-760.webp 760w" imagesizes="100vw" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" media="(min-width: 640px) and (min-aspect-ratio: 101/100)"
+      imagesrcset="/images/hero/hero-polo-960.webp 960w, /images/hero/hero-polo-1440.webp 1440w, /images/hero/hero-polo-1672.webp 1672w" imagesizes="100vw" fetchpriority="high" />
+    <title>FERVORO — Where Style Becomes Signature</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

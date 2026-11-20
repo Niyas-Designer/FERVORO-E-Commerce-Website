@@ -1,0 +1,1830 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/playfair-display';
+@import 'tailwindcss';
+
+/* ───────────── Design tokens: deep forest green · warm ivory · editorial serif ───────────── */
+@theme {
+  --font-serif: 'Playfair Display Variable', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --color-forest-950: #0d2621;
+  --color-forest-900: #11302a;
+  --color-forest-700: #24483f;
+  --color-forest-500: #5f7469;
+  --color-ivory-50: #f8f8f5;
+  --color-ivory-100: #f3f3ee;
+  --color-ivory-200: #e6e5dc;
+  --color-ivory-300: #d8d6ca;
+}
+
+/* ───────────── Layout token: the one standard gap between homepage sections ─────────────
+   Taken from the white divider between the Men / Boys panels (21px at 1920px, 8px on phones & small tablets).
+   Used horizontally (between side-by-side panels) AND vertically (between stacked sections, below the last section). */
+:root {
+  --section-gap: clamp(8px, 1.1vw, 21px);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: auto;
+  }
+  body {
+    margin: 0;
+    background: #fff;
+    color: var(--color-forest-900);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-forest-700);
+    outline-offset: 2px;
+  }
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  h1, h2 {
+    margin: 0;
+    font: inherit;
+  }
+  hr {
+    margin: 0;
+  }
+}
+
+/* ───────────── Skip link ───────────── */
+.fervoro-skip {
+  position: fixed;
+  left: 12px;
+  top: -64px;
+  z-index: 100;
+  background: var(--color-forest-900);
+  color: #fff;
+  padding: 10px 16px;
+  font-size: 14px;
+  transition: top 0.15s;
+}
+.fervoro-skip:focus {
+  top: 12px;
+}
+.fervoro-main {
+  outline: none;
+  background: #fff;
+  /* Clean white gap between every pair of sections, and below the last one before the footer. */
+  padding-bottom: var(--section-gap);
+}
+.fervoro-main > * + * { margin-top: var(--section-gap); }
+
+/* ───────────── Announcement bar ───────────── */
+.fervoro-announce {
+  background: var(--color-forest-900);
+  color: #fff;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  padding-inline: 12px;
+}
+.fervoro-announce p {
+  margin: 0;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ───────────── Header: 1fr · auto · 1fr keeps the wordmark centred ───────────── */
+.fervoro-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  /* Compact (mobile / tablet) header: hamburger · wordmark · bag. Left and right controls are
+     both 44px wide, and the 1fr·auto·1fr grid keeps the wordmark centred in the viewport. */
+  /* "FERVORO ITALY" is ~9.9em wide: on narrow phones the size is capped so it never touches the 88px icon cluster. */
+  --mark-size: clamp(12px, min(5.2vw, calc((100vw - 204px) / 9.9)), 28px);
+  --util-size: 44px;
+  --icon-size: 22px;
+}
+/* Full-bleed header surface. A positioned pseudo-element paints above the scrim (z-index: -1)
+   and spans the whole viewport, so no grey gutters can show beside the header. */
+.fervoro-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--color-ivory-200);
+}
+.fervoro-header-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 56px;
+  padding-inline: 6px; /* symmetric, so the 1fr·auto·1fr grid centres the wordmark exactly */
+}
+.fervoro-wordmark {
+  font-size: var(--mark-size);
+  letter-spacing: 0.16em;
+  padding-left: 0.16em; /* balances trailing tracking so glyphs sit dead-centre */
+  white-space: nowrap;
+  justify-self: center;
+}
+.fervoro-utils {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.fervoro-util-btn {
+  display: grid;
+  place-items: center;
+  width: var(--util-size);
+  height: 44px;
+  color: var(--color-forest-900);
+  border-radius: 6px;
+  transition: opacity 0.15s;
+}
+.fervoro-util-btn:hover {
+  opacity: 0.65;
+}
+.fervoro-util-icon {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+/* Hamburger ⇄ close */
+.fervoro-burger {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+}
+.fervoro-burger-bars {
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 14px;
+}
+.fervoro-burger-bars i {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-forest-900);
+  border-radius: 1px;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s, top 0.28s;
+}
+.fervoro-burger-bars i:nth-child(1) { top: 0; }
+.fervoro-burger-bars i:nth-child(2) { top: 6px; }
+.fervoro-burger-bars i:nth-child(3) { top: 12px; }
+.fervoro-burger[data-open='true'] i:nth-child(1) { top: 6px; transform: rotate(45deg); }
+.fervoro-burger[data-open='true'] i:nth-child(2) { opacity: 0; }
+.fervoro-burger[data-open='true'] i:nth-child(3) { top: 6px; transform: rotate(-45deg); }
+
+/* ───────────── Desktop / large laptop (≥ 1024px) ───────────── */
+@media (min-width: 1024px) {
+  .fervoro-header {
+    /* One shared gutter: header content, sidebar list and panel padding all line up. */
+    --gutter: clamp(24px, 2.8vw, 56px);
+    --mark-size: clamp(26px, 1.75vw, 34px);
+    --util-size: 40px;
+    --icon-size: 20px;
+  }
+  .fervoro-header-grid {
+    height: clamp(60px, 3.6vw, 72px);
+    padding-inline: var(--gutter);
+  }
+  .fervoro-utils { gap: 4px; }
+  .fervoro-util-btn { width: 40px; height: 40px; }
+}
+
+.fervoro-men-trigger {
+  position: relative;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  height: 44px;
+  padding-inline: 0; /* flush with the sidebar list below */
+  color: var(--color-forest-900);
+}
+.fervoro-men-trigger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.fervoro-men-trigger:hover::after,
+.fervoro-men-trigger[data-open='true']::after {
+  transform: scaleX(1);
+}
+
+/* Mega menu */
+.fervoro-scrim {
+  position: fixed; /* fixed => adds no scrollable height; z-index -1 keeps it behind the header bar */
+  inset: 0;
+  z-index: -1;
+  background: rgb(13 38 33 / 0.28);
+  animation: fervoro-fade 0.2s ease-out;
+}
+.fervoro-mega {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--color-ivory-100);
+  border-top: 1px solid var(--color-ivory-200);
+  box-shadow: 0 24px 40px -24px rgb(13 38 33 / 0.35);
+  animation: fervoro-drop 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fervoro-mega-grid {
+  /* Full viewport width: sidebar ≈ 22.9% (reference 435/1901), content takes the rest. */
+  display: grid;
+  grid-template-columns: minmax(200px, 22.9%) minmax(0, 1fr);
+  width: 100%;
+}
+.fervoro-mega-list {
+  background: var(--color-ivory-50);
+  padding: clamp(32px, 3.2vw, 60px) 0 clamp(32px, 3.2vw, 60px) var(--gutter);
+}
+.fervoro-mega-list ul { display: grid; gap: 0; }
+.fervoro-mega-cat {
+  /* Inactive: small serif at 50% opacity. Active: a refined, understated enlargement with a forest-green bar
+     (2.55vw → ~49px at 1920px, ≈ 2.8× the inactive size; halved from the first, much larger iteration).
+     Font-size, opacity and padding share one 360ms ease so the outgoing label shrinks exactly as the
+     incoming one grows – the list's total height stays constant, so nothing jumps. */
+  --cat-small: clamp(15px, 0.9vw, 18px);
+  --cat-big: clamp(22px, 2.55vw, 52px);
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-serif);
+  font-size: var(--cat-small);
+  line-height: 1.2;
+  opacity: 0.5;
+  padding-block: clamp(10px, 1.05vw, 19px); /* ≈ 58px row pitch at 1900px, like the reference */
+  white-space: nowrap;
+  transition:
+    font-size 0.36s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.36s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fervoro-mega-cat::after {
+  content: '';
+  position: absolute;
+  left: -0.03em;
+  right: -0.03em;
+  bottom: 0.1em; /* sits in the active state's bottom padding, below the baseline/descender */
+  height: 0.075em;
+  background: var(--color-forest-900);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.36s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.fervoro-mega-cat:hover,
+.fervoro-mega-cat:focus-visible { opacity: 0.8; }
+.fervoro-mega-cat[aria-current='true'] {
+  font-size: var(--cat-big);
+  line-height: 1.1;
+  opacity: 1;
+  padding-top: 0;
+  padding-bottom: 0.36em; /* room for the bar + the gap to the next label */
+}
+.fervoro-mega-cat[aria-current='true']::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-mega-cat,
+  .fervoro-mega-cat::after { transition: none; }
+}
+
+.fervoro-mega-panel {
+  padding: clamp(32px, 3.1vw, 60px) var(--gutter) clamp(36px, 3.4vw, 64px);
+  animation: fervoro-fade 0.25s ease-out;
+}
+.fervoro-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-forest-900);
+}
+.fervoro-hairline {
+  border: 0;
+  border-top: 1px solid var(--color-forest-900);
+  margin-top: 14px; /* full content width: heading rule spans the whole panel */
+}
+
+/* Card row. Card width is ALWAYS one quarter of the row (minus gaps), so every category shows
+   identically sized 3:4 cards: 4 cards fill the row exactly; 2 cards keep the same size and start
+   from the left edge, matching the alignment of Polo, Shirt and T-Shirt. */
+.fervoro-mega-cards {
+  --cols: 4;
+  --gap: clamp(12px, 1.05vw, 20px);
+  display: grid;
+  grid-template-columns: repeat(var(--n, 4), calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols)));
+  justify-content: start;
+  gap: var(--gap);
+  margin-top: clamp(16px, 1.1vw, 21px);
+}
+
+/* ───────────── Shared editorial image card ───────────── */
+.fervoro-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 480 / 636;
+  overflow: hidden;
+  background: var(--color-ivory-200);
+  container-type: inline-size;
+  color: #fff;
+  text-decoration: none;
+  -webkit-user-drag: none;
+}
+.fervoro-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+}
+.fervoro-card:hover .fervoro-card-img { transform: scale(1.035); }
+.fervoro-card-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(8 20 17 / 0.68) 0%, rgb(8 20 17 / 0.3) 26%, rgb(8 20 17 / 0) 52%);
+  pointer-events: none;
+}
+.fervoro-card-label {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 0 8px 12cqi;
+  text-align: center;
+}
+.fervoro-card-title {
+  font-family: var(--font-serif);
+  font-size: clamp(15px, 10.5cqi, 24px);
+  line-height: 1.15;
+  text-wrap: balance;
+  text-shadow: 0 1px 10px rgb(0 0 0 / 0.35);
+}
+.fervoro-card-rule {
+  width: 22cqi;
+  max-width: 48px;
+  height: 1px;
+  background: rgb(255 255 255 / 0.85);
+}
+
+/* ───────────── Mobile / tablet full-screen panel ───────────── */
+.fervoro-mobile-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  background: var(--color-ivory-50);
+  /* Column layout: scrollable category region + bottom-anchored utility bar. */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: fervoro-fade 0.2s ease-out;
+}
+.fervoro-mobile-scroll {
+  flex: 1 1 auto;
+  min-height: 0; /* lets the region shrink and scroll instead of pushing the utility bar out */
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 16px;
+}
+.fervoro-acc-item { border-bottom: 1px solid var(--color-ivory-200); }
+.fervoro-acc-item:first-child { border-top: 1px solid var(--color-ivory-200); }
+.fervoro-acc-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  text-align: left;
+}
+.fervoro-acc-label {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 1px;
+}
+.fervoro-acc-trigger[aria-expanded='true'] .fervoro-acc-label { text-decoration-line: underline; }
+.fervoro-acc-chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--color-forest-500);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fervoro-acc-trigger[aria-expanded='true'] .fervoro-acc-chevron { transform: rotate(180deg); }
+
+/* Animated height without measuring: grid-template-rows 0fr → 1fr */
+.fervoro-acc-region {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.38s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.38s;
+}
+.fervoro-acc-region[data-open='true'] {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.fervoro-acc-inner { min-height: 0; overflow: hidden; }
+
+.fervoro-carousel {
+  --card-w: clamp(148px, 52vw, 210px);
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 20px 24px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 20px;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  /* Mouse users get a slim visible scrollbar + grab cursor; touch screens stay clean. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-forest-500) transparent;
+  cursor: grab;
+}
+.fervoro-carousel.is-dragging {
+  scroll-snap-type: none;
+  cursor: grabbing;
+  user-select: none;
+}
+@media (pointer: coarse) {
+  .fervoro-carousel { scrollbar-width: none; cursor: auto; }
+  .fervoro-carousel::-webkit-scrollbar { display: none; }
+}
+.fervoro-carousel > li {
+  flex: 0 0 var(--card-w);
+  scroll-snap-align: start;
+}
+.fervoro-carousel::after { content: ''; flex: 0 0 8px; } /* end gutter */
+
+/* Utilities row inside the menu (Search · Account · Wishlist) */
+.fervoro-mobile-utils {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  flex: 0 0 auto; /* anchored to the bottom of the panel */
+  padding: 8px 12px calc(8px + env(safe-area-inset-bottom));
+  background: var(--color-ivory-50);
+  border-top: 1px solid var(--color-ivory-200);
+}
+.fervoro-mobile-util {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 80px;
+  border-radius: 6px;
+  color: var(--color-forest-900);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color 0.15s;
+}
+.fervoro-mobile-util:hover,
+.fervoro-mobile-util:active { background: var(--color-ivory-100); }
+.fervoro-mobile-util-icon { width: 24px; height: 24px; }
+
+/* ───────────── Phase 2: homepage hero ───────────── */
+/* Chrome above the hero = announcement bar (36px) + header row (56px mobile / clamp(60px, 3.6vw, 72px) desktop,
+   mirroring .fervoro-header-grid) so the hero fills exactly the first screen, with no gap beneath it. */
+:root { --hero-chrome: calc(36px + 56px); }
+@media (min-width: 1024px) { :root { --hero-chrome: calc(36px + clamp(60px, 3.6vw, 72px)); } }
+
+.fervoro-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: 100%;
+  height: calc(100vh - var(--hero-chrome));
+  height: calc(100svh - var(--hero-chrome));
+  min-height: 520px;
+  max-height: 1200px;
+  background: #302a22; /* warm placeholder tone while the photograph decodes (no white flash) */
+  color: #fff;
+}
+.fervoro-hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Landscape frame: keep the models' faces in view when the window is cropped vertically. */
+  object-position: 50% 6%;
+  user-select: none;
+  animation: fervoro-hero-settle 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+/* Portrait crop of the same photograph (the two central models). Must match HERO.image.portraitMedia. */
+@media (max-width: 639px), (max-aspect-ratio: 1/1) {
+  .fervoro-hero-img { object-position: 44% 6%; }
+  /* Slightly deeper gradient: the headline crosses the polos in this crop. */
+  .fervoro-hero-shade {
+    background: linear-gradient(to top, rgb(10 16 13 / 0.86) 0%, rgb(10 16 13 / 0.62) 30%, rgb(10 16 13 / 0.2) 52%, transparent 68%);
+  }
+}
+/* Gradient only where the text sits */
+.fervoro-hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(10 16 13 / 0.78) 0%, rgb(10 16 13 / 0.5) 26%, rgb(10 16 13 / 0.12) 52%, transparent 66%);
+  pointer-events: none;
+}
+.fervoro-hero-content {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 clamp(20px, 5vw, 80px) clamp(36px, 8vh, 96px);
+}
+.fervoro-hero-caption {
+  margin: 0 0 clamp(14px, 1.6vw, 22px);
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  padding-left: 0.34em; /* balance trailing tracking so the line is optically centred */
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.9);
+}
+.fervoro-hero-title {
+  margin: 0;
+  max-width: 14em;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 4.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  color: #fff;
+  text-shadow: 0 2px 24px rgb(0 0 0 / 0.28);
+}
+.fervoro-hero-cta {
+  display: inline-block;
+  margin-top: clamp(22px, 2.6vw, 36px);
+  padding: 8px 2px 7px;
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  padding-left: calc(2px + 0.24em);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 1px solid rgb(255 255 255 / 0.9);
+  transition: letter-spacing 0.35s ease, border-color 0.2s ease, opacity 0.2s;
+}
+.fervoro-hero-cta:hover { letter-spacing: 0.3em; border-bottom-color: #fff; }
+.fervoro-hero-cta:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+.fervoro-hero-note {
+  margin: 10px 0 0;
+  height: 18px; /* fixed box (height = line-height), so showing the message never shifts layout */
+  line-height: 18px;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  color: rgb(255 255 255 / 0.85);
+}
+@media (max-width: 639px) {
+  .fervoro-hero-title { font-size: clamp(2rem, 9.4vw, 2.6rem); max-width: 11em; }
+  .fervoro-hero-caption { letter-spacing: 0.3em; padding-left: 0.3em; }
+}
+
+@keyframes fervoro-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fervoro-hero-settle { from { transform: scale(1.04); } to { transform: none; } }
+.fervoro-reveal { animation: fervoro-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-reveal, .fervoro-hero-img { animation: none !important; }
+  .fervoro-hero-cta { transition: none; }
+}
+
+/* ───────────── Motion ───────────── */
+@keyframes fervoro-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fervoro-drop { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ───────────── Phase 3: site footer ───────────── */
+/* Reference proportions at 1903px: columns start at 81 / 500 / 950 / 1400 (26.3% · 23.6% · 23.6% · 26.5%),
+   hairline separators between columns, social band 88px between hairlines, centred copyright. */
+.fervoro-footer {
+  --fpad: clamp(24px, 4.26vw, 104px);
+  background: var(--color-ivory-50);
+  border-top: 1px solid var(--color-ivory-300);
+  color: var(--color-forest-900);
+}
+.fervoro-footer-title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Phone (default): stacked accordion groups */
+.fervoro-footer-grid { display: block; }
+.fervoro-footer-col {
+  padding-inline: 20px;
+  border-bottom: 1px solid var(--color-ivory-300);
+}
+.fervoro-footer-acc {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-align: left;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+.fervoro-footer-chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--color-forest-500);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fervoro-footer-acc[aria-expanded='true'] .fervoro-footer-chevron { transform: rotate(180deg); }
+.fervoro-footer-region {
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+}
+.fervoro-footer-region > ul { min-height: 0; overflow: hidden; }
+.fervoro-footer-col[data-collapsible='true'] .fervoro-footer-region[data-open='false'] {
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s 0.3s;
+}
+.fervoro-footer-col[data-collapsible='true'] .fervoro-footer-links { padding-bottom: 14px; }
+
+.fervoro-footer-link {
+  display: inline-block;
+  padding-block: 4.5px;
+  font-size: 13px;
+  line-height: 17px;
+  text-align: left;
+  color: var(--color-forest-900);
+  text-decoration: underline transparent;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.2s;
+}
+a.fervoro-footer-link:hover { text-decoration-color: currentColor; }
+.fervoro-footer-link.is-pending { cursor: default; } /* planned page – deliberately no hover affordance */
+.fervoro-footer-col[data-collapsible='true'] .fervoro-footer-link { padding-block: 9px; }
+
+/* Newsletter */
+.fervoro-footer-col-news { padding-block: 30px 34px; border-bottom: 0; }
+.fervoro-footer-news .fervoro-footer-title { margin-bottom: 14px; }
+.fervoro-footer-news-text {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--color-forest-700);
+}
+.fervoro-footer-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+.fervoro-footer-input {
+  flex: 1 1 100%;
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--color-forest-900);
+  border-radius: 0;
+  background: #fff;
+  color: var(--color-forest-900);
+  font: inherit;
+  font-size: 16px; /* ≥16px prevents iOS Safari zoom-on-focus */
+  appearance: none;
+}
+.fervoro-footer-input::placeholder { color: var(--color-forest-500); opacity: 1; }
+.fervoro-footer-input[data-invalid='true'] { border-color: #8a2d2d; box-shadow: inset 0 0 0 1px #8a2d2d; }
+.fervoro-footer-submit {
+  flex: 1 1 auto;
+  height: 48px;
+  padding: 0 26px;
+  background: var(--color-forest-900);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: background-color 0.2s;
+}
+.fervoro-footer-submit:hover { background: var(--color-forest-700); }
+.fervoro-footer-note {
+  min-height: 40px; /* two lines reserved: messages never shift the layout */
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  line-height: 20px;
+  color: var(--color-forest-700);
+}
+.fervoro-footer-note[data-status='error'] { color: #8a2d2d; }
+.fervoro-footer-privacy {
+  margin: 4px 0 0;
+  max-width: 44ch;
+  font-size: 11.5px;
+  line-height: 1.65;
+  color: var(--color-forest-500);
+}
+
+/* Social band */
+.fervoro-footer-band {
+  display: flex;
+  justify-content: center;
+  padding-block: 22px;
+  border-top: 1px solid var(--color-ivory-300);
+  border-bottom: 1px solid var(--color-ivory-300);
+}
+.fervoro-footer-social { display: flex; justify-content: center; gap: 4px; }
+.fervoro-footer-social-item {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  color: var(--color-forest-900);
+  transition: color 0.2s, transform 0.2s;
+}
+a.fervoro-footer-social-item:hover { color: var(--color-forest-500); transform: translateY(-1px); }
+.fervoro-footer-social-item.is-pending { cursor: default; }
+.fervoro-footer-copy {
+  margin: 0;
+  padding: 28px 20px 32px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--color-forest-700);
+}
+
+/* Tablet: two columns */
+@media (min-width: 640px) {
+  .fervoro-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 40px var(--fpad) 44px;
+  }
+  .fervoro-footer-col { padding: 0 32px 36px; border-bottom: 0; }
+  .fervoro-footer-col:nth-child(odd) { padding-left: 0; }
+  .fervoro-footer-col:nth-child(even) { padding-right: 0; border-left: 1px solid var(--color-ivory-300); }
+  .fervoro-footer-col:nth-child(n + 3) { padding-top: 36px; padding-bottom: 0; border-top: 1px solid var(--color-ivory-300); }
+  .fervoro-footer-title { margin-bottom: 18px; }
+  .fervoro-footer-col-news { padding-block: 36px 0; }
+  .fervoro-footer-input { flex: 1 1 140px; height: 44px; font-size: 13px; }
+  .fervoro-footer-submit { height: 44px; }
+  .fervoro-footer-news .fervoro-footer-title { margin-bottom: 14px; }
+  .fervoro-footer-copy { padding-block: 26px 30px; }
+}
+
+/* Desktop: four columns with hairline separators */
+@media (min-width: 1024px) {
+  .fervoro-footer-grid {
+    grid-template-columns: 26.3% 23.6% 23.6% 26.5%;
+    padding: 36px 0;
+  }
+  .fervoro-footer-col,
+  .fervoro-footer-col:nth-child(odd),
+  .fervoro-footer-col:nth-child(even),
+  .fervoro-footer-col:nth-child(n + 3) {
+    padding: 0 30px;
+    border-top: 0;
+    border-left: 1px solid var(--color-ivory-300);
+  }
+  .fervoro-footer-col:first-child { padding-left: var(--fpad); border-left: 0; }
+  .fervoro-footer-col:last-child { padding-right: var(--fpad); }
+  .fervoro-footer-col-news { padding-block: 0; }
+  .fervoro-footer-copy { padding-block: 28px 32px; }
+}
+
+/* ───────────── Homepage: Men / Boys category showcase ───────────── */
+/* Reference (1903px): two panels ≈ 937 × 860 with a ~21px white divider, text lower-left (70px in, ~90px up). */
+.fervoro-showcase {
+  --showcase-pad: clamp(22px, 3.7vw, 72px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--section-gap);
+  background: #fff;
+}
+.fervoro-showcase-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: clamp(480px, 45vw, 1100px);
+  background: #3a3226; /* shown only until the photograph decodes */
+  color: #fff;
+}
+.fervoro-showcase-img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 2%; /* keeps the whole head with a little headroom in frame; the body crops from the bottom */
+}
+.fervoro-showcase-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to top,
+    rgb(9 17 14 / 0.84) 0%,
+    rgb(9 17 14 / 0.62) 30%,
+    rgb(9 17 14 / 0.22) 52%,
+    transparent 70%
+  );
+}
+.fervoro-showcase-content {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0 var(--showcase-pad) clamp(46px, 5.4vw, 104px);
+  max-width: 100%;
+}
+.fervoro-showcase-label {
+  margin: 0;
+  font-size: clamp(10.5px, 0.74vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.92);
+}
+.fervoro-showcase-title {
+  margin-top: clamp(10px, 1vw, 18px);
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.7rem, 3.1vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  color: #fff;
+}
+.fervoro-showcase-desc {
+  margin: clamp(10px, 1.1vw, 20px) 0 0;
+  max-width: 46ch; /* both descriptions stay on one line on desktop, so the two text blocks share the same baselines */
+  font-family: var(--font-serif);
+  font-size: clamp(14px, 1.2vw, 22px);
+  line-height: 1.65;
+  color: rgb(255 255 255 / 0.94);
+}
+/* CTA row: identical height in both panels, so both text blocks align on the same baselines. */
+.fervoro-showcase-action {
+  position: relative;
+  height: 34px;
+  margin-top: clamp(16px, 1.9vw, 34px);
+  display: flex;
+  align-items: flex-end;
+}
+.fervoro-showcase-cta {
+  display: inline-block;
+  padding: 8px 2px 7px 0;
+  line-height: 16px;
+  font-size: clamp(11px, 0.85vw, 13.5px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 1px solid rgb(255 255 255 / 0.9);
+  transition: letter-spacing 0.35s ease, border-color 0.2s;
+}
+.fervoro-showcase-cta:hover { letter-spacing: 0.26em; border-bottom-color: #fff; }
+.fervoro-showcase-cta:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+.fervoro-showcase-note {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 4px);
+  margin: 0;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  color: rgb(255 255 255 / 0.88);
+}
+/* Coming soon: a quiet, bordered, non-interactive label – deliberately unlike the underlined Shop Now CTA. */
+.fervoro-showcase-status {
+  display: inline-block;
+  margin: 0;
+  padding: 7px 14px;
+  line-height: 16px;
+  font-size: clamp(10.5px, 0.8vw, 12.5px);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.92);
+  border: 1px solid rgb(255 255 255 / 0.5);
+  cursor: default;
+  user-select: none;
+}
+
+/* Tablet: keep two columns, switch to the photographs' native 4:5 proportion so nothing is cropped away */
+@media (max-width: 1023px) {
+  .fervoro-showcase-panel { height: auto; aspect-ratio: 4 / 5; }
+  .fervoro-showcase-title { font-size: clamp(1.35rem, 3.4vw, 2.1rem); }
+  .fervoro-showcase-desc { font-size: clamp(12.5px, 1.6vw, 15px); }
+  .fervoro-showcase-content { padding-bottom: clamp(40px, 5vw, 56px); }
+  .fervoro-showcase-shade {
+    background: linear-gradient(to top, rgb(9 17 14 / 0.88) 0%, rgb(9 17 14 / 0.7) 36%, rgb(9 17 14 / 0.28) 58%, transparent 78%);
+  }
+}
+/* Narrow two-column tablets: reserve two description lines in both panels so the headings stay aligned */
+@media (min-width: 640px) and (max-width: 767px) {
+  .fervoro-showcase-desc { min-height: 3.3em; }
+}
+/* Phone: stacked, Men first */
+@media (max-width: 639px) {
+  .fervoro-showcase { grid-template-columns: minmax(0, 1fr); --showcase-pad: 22px; }
+  .fervoro-showcase-title { font-size: clamp(1.75rem, 7.6vw, 2.3rem); }
+  .fervoro-showcase-desc { font-size: 15px; }
+  .fervoro-showcase-content { padding-bottom: 44px; }
+  .fervoro-showcase-shade {
+    background: linear-gradient(to top, rgb(9 17 14 / 0.88) 0%, rgb(9 17 14 / 0.66) 34%, rgb(9 17 14 / 0.2) 58%, transparent 76%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-showcase-cta { transition: none; }
+}
+
+/* ───────────── Homepage: FERVORO IN MOTION (portrait video gallery) ─────────────
+   Panels keep the clips' native 9:16 ratio (no stretching, no 16:9 cropping). Panel height is capped by viewport height,
+   so 3-up on desktop never becomes taller than the screen. Separation above/below comes from the global --section-gap. */
+.fervoro-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+.fervoro-motion {
+  position: relative;
+  background: var(--color-forest-950);
+  color: var(--color-ivory-50);
+  padding: clamp(40px, 5.4vw, 104px) clamp(16px, 4vw, 72px) clamp(32px, 4vw, 76px);
+}
+.fervoro-motion :focus-visible { outline: 2px solid var(--color-ivory-50); outline-offset: 3px; }
+.fervoro-motion-head { text-align: center; margin-bottom: clamp(24px, 3.2vw, 60px); }
+.fervoro-motion-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.45rem, 2.7vw, 2.95rem);
+  letter-spacing: 0.16em;
+  line-height: 1.15;
+}
+.fervoro-motion-tagline {
+  margin: clamp(8px, 0.9vw, 16px) 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.2vw, 1.25rem);
+  color: var(--color-ivory-300);
+}
+.fervoro-motion-stage {
+  --slide-h: clamp(460px, 82vh, 900px);
+  --slide-h: clamp(460px, 82svh, 900px);
+  --slide-w: calc(var(--slide-h) * 9 / 16);
+  width: min(100%, calc(var(--per, 3) * var(--slide-w) + (var(--per, 3) - 1) * var(--section-gap)));
+  margin-inline: auto;
+}
+.fervoro-motion-track {
+  position: relative; /* offsetParent for slide offsets */
+  display: flex;
+  gap: var(--section-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.fervoro-motion-track::-webkit-scrollbar { display: none; }
+.fervoro-motion-slide {
+  flex: 0 0 calc((100% - (var(--per, 3) - 1) * var(--section-gap)) / var(--per, 3));
+  min-width: 0;
+  margin: 0;
+  scroll-snap-align: start;
+}
+.fervoro-motion-media {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  background: var(--color-forest-900);
+  cursor: pointer;
+  opacity: 0.74;
+  transition: opacity 0.3s ease;
+}
+.fervoro-motion-slide.is-active .fervoro-motion-media { opacity: 1; }
+.fervoro-motion-media::after { /* soft base so the control stays legible over bright footage */
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 26%;
+  background: linear-gradient(to top, rgb(13 38 33 / 0.5), transparent);
+  pointer-events: none;
+}
+.fervoro-motion-poster,
+.fervoro-motion-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* panel ratio == clip ratio, so nothing is cropped */
+}
+.fervoro-motion-video { opacity: 0; transition: opacity 0.4s ease; }
+.fervoro-motion-video.is-live { opacity: 1; }
+.fervoro-motion-toggle {
+  position: absolute;
+  z-index: 2;
+  left: clamp(10px, 1.1vw, 18px);
+  bottom: clamp(10px, 1.1vw, 18px);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--color-ivory-50);
+  background: rgb(13 38 33 / 0.66);
+  border: 1px solid rgb(248 248 245 / 0.6);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.fervoro-motion-toggle:hover { background: var(--color-ivory-50); color: var(--color-forest-950); }
+.fervoro-motion-caption {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 12px;
+  padding-top: 14px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-ivory-300);
+}
+.fervoro-motion-num { font-family: var(--font-serif); font-size: 1.15em; letter-spacing: 0.06em; color: var(--color-ivory-50); }
+.fervoro-motion-unavail { text-transform: none; letter-spacing: 0.02em; font-style: italic; }
+.fervoro-motion-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: clamp(18px, 2.2vw, 36px);
+}
+.fervoro-motion-nav {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: var(--color-ivory-50);
+  border: 1px solid rgb(248 248 245 / 0.5);
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+.fervoro-motion-nav:hover:not([aria-disabled='true']) { background: var(--color-ivory-50); color: var(--color-forest-950); }
+.fervoro-motion-nav[aria-disabled='true'] { opacity: 0.35; cursor: default; }
+.fervoro-motion-count { min-width: 5.5em; text-align: center; font-family: var(--font-serif); font-size: 1rem; letter-spacing: 0.18em; color: var(--color-ivory-100); }
+@media (max-width: 639px) {
+  .fervoro-motion { padding-inline: 16px; }
+  .fervoro-motion-caption { font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-motion-media,
+  .fervoro-motion-video,
+  .fervoro-motion-toggle,
+  .fervoro-motion-nav { transition: none; }
+}
+
+/* ───────────── Homepage: edge-to-edge video gallery (between Men / Boys and the collection slider) ─────────────
+   One continuous strip of 9:16 clips: white band, zero gaps, no outer margins, no text. Spacing above and below comes
+   from the global --section-gap. Arrows exist only on desktop hover / keyboard focus. */
+.fervoro-gallery { position: relative; overflow: hidden; background: #fff; line-height: 0; }
+.fervoro-gallery-track {
+  display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.fervoro-gallery-track::-webkit-scrollbar { display: none; }
+.fervoro-gallery-track > li { flex: 0 0 20%; min-width: 0; margin: 0; padding: 0; scroll-snap-align: start; }
+@media (max-width: 1023px) { .fervoro-gallery-track > li { flex-basis: 33.33334%; } }
+@media (max-width: 639px) { .fervoro-gallery-track > li { flex-basis: 72%; } }
+.fervoro-gallery-media { position: relative; overflow: hidden; aspect-ratio: 9 / 16; background: var(--color-forest-900); cursor: pointer; }
+.fervoro-gallery-fill { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; /* panel ratio == clip ratio: nothing is cropped */ user-select: none; }
+.fervoro-gallery-video { opacity: 0; transition: opacity 0.4s ease; }
+.fervoro-gallery-video.is-live { opacity: 1; }
+.fervoro-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: none;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border-radius: 50%;
+  color: var(--color-forest-900);
+  background: rgb(255 255 255 / 0.82);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, background-color 0.2s ease;
+}
+.fervoro-gallery-arrow.is-prev { left: 16px; }
+.fervoro-gallery-arrow.is-next { right: 16px; }
+.fervoro-gallery-arrow[data-edge='true'] { visibility: hidden; }
+.fervoro-gallery-arrow:hover { background: #fff; }
+@media (hover: hover) and (pointer: fine) {
+  .fervoro-gallery-arrow { display: grid; }
+  .fervoro-gallery:hover .fervoro-gallery-arrow, .fervoro-gallery:focus-within .fervoro-gallery-arrow { opacity: 1; pointer-events: auto; }
+}
+.fervoro-gallery-arrow:focus-visible { display: grid; opacity: 1; pointer-events: auto; outline: 2px solid var(--color-forest-900); outline-offset: 2px; }
+.fervoro-gallery-pause { /* screen-reader / keyboard control: invisible until it receives focus */
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+  padding: 10px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ivory-50);
+  background: var(--color-forest-900);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.fervoro-gallery-pause:focus-visible { width: auto; height: auto; clip-path: none; overflow: visible; outline: 2px solid #fff; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-gallery-video, .fervoro-gallery-arrow { transition: none; }
+}
+
+/* ───────────── Homepage: FERVORO Collections slider ─────────────
+   Reference structure: heading + description with prev/next top-right, then a full-bleed row of tall photo cards with the
+   next card peeking in. Cards use the nav photographs' native 900×1192 ratio, so images fill them with no crop or distortion.
+   Gap between cards and the spacing above/below use the global --section-gap (no outer margins here). */
+.fervoro-collections {
+  --coll-pad: clamp(16px, 3.8vw, 72px);
+  --coll-view: 3.3; /* cards visible at once (fractional → the next one peeks) */
+  background: #fff;
+}
+.fervoro-collections-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: 'title nav' 'desc nav';
+  align-items: center;
+  column-gap: 24px;
+  padding: clamp(24px, 3.2vw, 60px) var(--coll-pad) clamp(18px, 2vw, 36px);
+}
+.fervoro-collections-title {
+  grid-area: title;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--color-forest-900);
+}
+.fervoro-collections-desc {
+  grid-area: desc;
+  max-width: 62ch;
+  margin: clamp(8px, 0.9vw, 16px) 0 0;
+  font-family: var(--font-serif);
+  font-size: clamp(0.95rem, 1.3vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--color-forest-900);
+  text-wrap: pretty;
+}
+.fervoro-collections-nav {
+  grid-area: nav;
+  display: flex;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--color-ivory-200);
+}
+.fervoro-collections-nav button {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 44px;
+  color: var(--color-forest-900);
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+.fervoro-collections-nav button + button { box-shadow: inset 1px 0 0 rgb(17 48 42 / 0.3); }
+.fervoro-collections-nav button:hover:not([aria-disabled='true']) { background: var(--color-ivory-300); }
+.fervoro-collections-nav button[aria-disabled='true'] { opacity: 0.4; cursor: default; }
+.fervoro-collections-nav button:focus-visible { outline-offset: -3px; }
+.fervoro-collections-track {
+  display: flex;
+  gap: var(--section-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.fervoro-collections-track::-webkit-scrollbar { display: none; }
+.fervoro-collections-card {
+  flex: 0 0 min(calc((100% - (var(--coll-view) - 1) * var(--section-gap)) / var(--coll-view)), 720px);
+  aspect-ratio: 900 / 1192;
+  scroll-snap-align: start;
+  background: var(--color-forest-900); /* visible only until the photograph decodes */
+}
+.fervoro-collections-link {
+  --coll-bottom: clamp(24px, 3.4vw, 64px);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 0 var(--coll-pad) var(--coll-bottom);
+  overflow: hidden;
+  color: #fff;
+}
+.fervoro-collections-img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.fervoro-collections-shade { /* subtle dark base so the white text stays legible on any photograph */
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, rgb(9 17 14 / 0.86) 0%, rgb(9 17 14 / 0.64) 24%, rgb(9 17 14 / 0.34) 44%, rgb(9 17 14 / 0) 68%);
+  pointer-events: none;
+}
+/* Three-level hierarchy (same scale as the approved Men / Boys panels): label · serif heading · underlined CTA */
+.fervoro-collections-label {
+  margin: 0;
+  font-size: clamp(10.5px, 0.74vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.92);
+}
+.fervoro-collections-card-title {
+  margin: clamp(8px, 0.8vw, 14px) 0 0;
+  max-width: 100%;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.55rem, 2.1vw, 2.5rem);
+  letter-spacing: -0.005em;
+  line-height: 1.08;
+  color: #fff;
+}
+.fervoro-collections-cta {
+  margin-top: clamp(14px, 1.6vw, 30px);
+  display: inline-block;
+  padding: 8px 2px 7px 0;
+  line-height: 16px;
+  font-size: clamp(11px, 0.85vw, 13.5px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  border-bottom: 1px solid rgb(255 255 255 / 0.9);
+  transition: letter-spacing 0.35s ease;
+}
+.fervoro-collections-cta::after { /* stretched hit area: the whole card is the one and only control */
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.fervoro-collections-cta:hover { letter-spacing: 0.26em; }
+.fervoro-collections-cta:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+.fervoro-collections-card:has(.fervoro-collections-cta) { cursor: pointer; }
+.fervoro-collections-note { /* live region for the preview state; absolutely placed so it never shifts the layout */
+  position: absolute;
+  left: var(--coll-pad);
+  bottom: calc(var(--coll-bottom) - 22px);
+  margin: 0;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  color: rgb(255 255 255 / 0.9);
+  pointer-events: none;
+}
+@media (max-width: 1023px) { .fervoro-collections { --coll-view: 2.3; } }
+@media (max-width: 639px) {
+  .fervoro-collections { --coll-view: 1.15; }
+  .fervoro-collections-head { grid-template-areas: 'title nav' 'desc desc'; align-items: start; }
+  .fervoro-collections-nav { align-self: start; }
+  .fervoro-collections-desc { max-width: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-collections-nav button,
+  .fervoro-collections-cta { transition: none; }
+}
+
+/* ───────────── Collection landing page (/collection) ─────────────
+   Hero = the shared .fervoro-hero. Everything below sits on white; spacing between sections comes from the global
+   --section-gap (.fervoro-main > * + *), inner padding from --cat-pad (same value as --coll-pad). */
+.fervoro-intro,
+.fervoro-cat { --cat-pad: clamp(16px, 3.8vw, 72px); background: #fff; }
+
+.fervoro-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(40px, 6.5vw, 128px) var(--cat-pad) clamp(28px, 4vw, 80px);
+}
+.fervoro-intro-eyebrow {
+  margin: 0 0 clamp(16px, 1.8vw, 28px);
+  font-family: var(--font-sans);
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  padding-left: 0.3em; /* balances the trailing tracking so the label is optically centred */
+  text-transform: uppercase;
+  color: var(--color-forest-700);
+}
+.fervoro-intro-text {
+  margin: 0;
+  max-width: 46rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 1.55vw, 1.6rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+  color: var(--color-forest-900);
+}
+.fervoro-intro-rule { display: block; width: 48px; height: 1px; margin-top: clamp(24px, 2.8vw, 44px); background: var(--color-forest-900); opacity: 0.55; }
+
+.fervoro-cat { padding: clamp(28px, 4vw, 76px) var(--cat-pad); }
+.fervoro-cat-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-bottom: clamp(18px, 2vw, 36px);
+}
+.fervoro-cat-title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 2.6vw, 3rem);
+  line-height: 1.08;
+  color: var(--color-forest-900);
+}
+.fervoro-cat-blurb {
+  margin: clamp(6px, 0.7vw, 12px) 0 0;
+  font-size: clamp(13.5px, 1vw, 16px);
+  line-height: 1.5;
+  color: var(--color-forest-700);
+}
+.fervoro-cat-action { position: relative; flex: none; padding-bottom: 4px; }
+.fervoro-cat-all {
+  display: inline-block;
+  padding: 8px 2px 7px;
+  padding-left: calc(2px + 0.2em);
+  font: inherit;
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-forest-900);
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--color-forest-900);
+  border-radius: 0;
+  cursor: pointer;
+  transition: letter-spacing 0.35s ease;
+}
+.fervoro-cat-all:hover { letter-spacing: 0.26em; }
+.fervoro-cat-all:focus-visible { outline: 2px solid var(--color-forest-900); outline-offset: 6px; }
+.fervoro-cat-note {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin: 4px 0 0;
+  height: 18px;
+  line-height: 18px;
+  font-size: 12px;
+  font-style: italic;
+  white-space: nowrap;
+  color: var(--color-forest-700);
+  pointer-events: none;
+}
+
+.fervoro-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 48px) var(--section-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.fervoro-pcard { min-width: 0; }
+.fervoro-pcard-media { aspect-ratio: 900 / 1192; overflow: hidden; background: var(--color-ivory-200); }
+.fervoro-pcard-media img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
+.fervoro-pcard-name {
+  margin: clamp(10px, 1vw, 16px) 0 0;
+  font-size: clamp(13.5px, 1vw, 16px);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--color-forest-900);
+}
+.fervoro-pcard-price { margin: 4px 0 0; font-size: clamp(13px, 0.95vw, 15px); color: var(--color-forest-700); font-variant-numeric: tabular-nums; }
+
+@media (min-width: 1024px) {
+  .fervoro-cat-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  /* Fewer than four products: text on the left half, the two cards (same width as everywhere else) on the right half. */
+  .fervoro-cat.is-short .fervoro-cat-inner { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--section-gap); align-items: end; }
+  .fervoro-cat.is-short .fervoro-cat-head { grid-column: 1 / 3; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: clamp(20px, 2.4vw, 40px); margin: 0; padding-bottom: clamp(48px, 5vw, 96px); }
+  .fervoro-cat.is-short .fervoro-cat-grid { grid-column: 3 / 5; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fervoro-cat.is-short .fervoro-cat-title { font-size: clamp(2.25rem, 3.6vw, 4.25rem); }
+  .fervoro-cat.is-short .fervoro-cat-note { left: 0; right: auto; }
+}
+@media (max-width: 639px) {
+  .fervoro-cat-head { align-items: flex-end; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-cat-all { transition: none; }
+}
+
+/* ───────────── Shop: product listing (/shop, /shop/:category) ───────────── */
+:root { --shop-pad: clamp(16px, 2vw, 32px); --header-row: 56px; }
+@media (min-width: 1024px) { :root { --header-row: clamp(60px, 3.6vw, 72px); } }
+html:has(dialog[open]) { overflow: hidden; }
+
+.fervoro-plp { background: #fff; padding: clamp(20px, 2.4vw, 40px) var(--shop-pad) clamp(40px, 5vw, 96px); }
+.fervoro-plp-title { font-size: clamp(0.95rem, 1.1vw, 1.1rem); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.fervoro-plp-tabs { display: flex; flex-wrap: wrap; gap: 6px clamp(14px, 1.6vw, 26px); margin-top: clamp(14px, 1.6vw, 24px); }
+.fervoro-plp-tab {
+  display: inline-block; padding: 6px 0; font-size: 12.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  text-decoration: none; color: var(--color-forest-500); border-bottom: 1px solid transparent; transition: color 0.2s;
+}
+.fervoro-plp-tab:hover { color: var(--color-forest-900); }
+.fervoro-plp-tab[aria-current='page'] { color: var(--color-forest-900); border-bottom-color: var(--color-forest-900); }
+
+.fervoro-plp-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin: clamp(18px, 2.4vw, 40px) 0 clamp(14px, 1.6vw, 24px); }
+.fervoro-plp-filterbtn {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 2px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+}
+.fervoro-plp-badge { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; font-size: 11px; letter-spacing: 0; color: #fff; background: var(--color-forest-900); border-radius: 9px; }
+.fervoro-plp-count { margin: 0; font-size: 13px; color: var(--color-forest-500); }
+.fervoro-plp-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px clamp(16px, 2vw, 32px); margin-left: auto; }
+.fervoro-plp-sort { display: inline-flex; white-space: nowrap; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.fervoro-plp-sort select {
+  min-height: 44px; padding: 0 28px 0 4px; font: inherit; font-size: 13px; font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--color-forest-900);
+  background: transparent; border: 0; border-bottom: 1px solid var(--color-ivory-300); border-radius: 0; cursor: pointer;
+  appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2311302a' stroke-width='1.6' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 2px center; background-size: 16px;
+}
+.fervoro-plp-view { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.fervoro-plp-view span { margin-right: 6px; }
+.fervoro-plp-view button { min-width: 32px; min-height: 44px; font-size: 13px; color: var(--color-forest-500); border-bottom: 1px solid transparent; }
+.fervoro-plp-view button[aria-pressed='true'] { color: var(--color-forest-900); border-bottom-color: var(--color-forest-900); }
+
+.fervoro-plp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 clamp(14px, 1.6vw, 24px); }
+.fervoro-plp-chips button { min-height: 32px; padding: 0 12px; font-size: 12.5px; color: var(--color-forest-900); background: var(--color-ivory-100); border-radius: 16px; }
+.fervoro-plp-chips button:hover { background: var(--color-ivory-200); }
+.fervoro-plp-chips .is-clear { background: none; text-decoration: underline; text-underline-offset: 3px; }
+
+/* Grid: 2 columns by default, 3 from 1024px, 4 from 1280px. A chosen "View" overrides it (data-wide ≥1024, data-narrow below). */
+.fervoro-plp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 2.4vw, 40px) var(--section-gap); }
+@media (min-width: 1024px) { .fervoro-plp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1280px) { .fervoro-plp-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 1024px) {
+  .fervoro-plp-grid[data-wide='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .fervoro-plp-grid[data-wide='3'] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .fervoro-plp-grid[data-wide='4'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 1023px) {
+  .fervoro-plp-grid[data-narrow='1'] { grid-template-columns: minmax(0, 1fr); }
+  .fervoro-plp-grid[data-narrow='2'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.fervoro-plp-empty { padding: clamp(48px, 8vw, 140px) 0; text-align: center; }
+.fervoro-plp-empty p { margin: 0 0 20px; color: var(--color-forest-700); }
+
+.fervoro-plp-card { min-width: 0; }
+.fervoro-plp-media { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--color-ivory-200); }
+.fervoro-plp-track {
+  display: flex; height: 100%; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.fervoro-plp-track::-webkit-scrollbar { display: none; }
+.fervoro-plp-slide { flex: 0 0 100%; height: 100%; scroll-snap-align: start; scroll-snap-stop: always; }
+.fervoro-plp-slide a, .fervoro-plp-slide img { display: block; width: 100%; height: 100%; }
+.fervoro-plp-slide img { object-fit: cover; user-select: none; }
+.fervoro-plp-arrow {
+  position: absolute; top: 50%; z-index: 2; display: grid; place-items: center; width: 40px; height: 40px; margin-top: -20px;
+  color: var(--color-forest-900); background: rgb(255 255 255 / 0.9); border-radius: 50%; opacity: 0; transition: opacity 0.2s;
+}
+.fervoro-plp-arrow svg { width: 20px; height: 20px; }
+.fervoro-plp-arrow.is-prev { left: 8px; }
+.fervoro-plp-arrow.is-next { right: 8px; }
+.fervoro-plp-arrow[aria-disabled='true'] { opacity: 0 !important; pointer-events: none; }
+/* Hover-capable devices: arrows fade in on hover / keyboard focus. Touch devices: always visible (and the strip swipes). */
+@media (hover: hover) { .fervoro-plp-card:hover .fervoro-plp-arrow, .fervoro-plp-card:focus-within .fervoro-plp-arrow { opacity: 1; } }
+@media (hover: none) { .fervoro-plp-arrow { opacity: 1; width: 32px; height: 32px; margin-top: -16px; } .fervoro-plp-arrow svg { width: 16px; height: 16px; } }
+.fervoro-plp-dots { position: absolute; left: 0; right: 0; bottom: 10px; z-index: 1; display: flex; justify-content: center; gap: 5px; pointer-events: none; }
+.fervoro-plp-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgb(255 255 255 / 0.55); box-shadow: 0 0 0 1px rgb(0 0 0 / 0.12); }
+.fervoro-plp-dots i[data-on='true'] { background: #fff; }
+
+.fervoro-heart { display: grid; place-items: center; width: 44px; height: 44px; color: var(--color-forest-900); }
+.fervoro-heart svg { width: 22px; height: 22px; transition: transform 0.2s; }
+.fervoro-heart:hover svg { transform: scale(1.08); }
+.fervoro-heart[aria-pressed='true'] { color: var(--color-forest-900); }
+.fervoro-plp-heart { position: absolute; top: 2px; right: 2px; z-index: 2; }
+
+.fervoro-plp-info { padding-top: clamp(10px, 1vw, 14px); }
+.fervoro-plp-name { margin: 0; font-size: clamp(13.5px, 1vw, 15px); font-weight: 500; line-height: 1.35; }
+.fervoro-plp-name a { color: var(--color-forest-900); text-decoration: none; }
+.fervoro-plp-name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.fervoro-plp-price { margin: 3px 0 0; font-size: clamp(13px, 0.95vw, 14.5px); color: var(--color-forest-700); font-variant-numeric: tabular-nums; }
+.fervoro-plp-colorcount { margin: 4px 0 0; font-size: 12.5px; color: var(--color-forest-500); }
+.fervoro-swatches { display: inline-flex; flex-wrap: wrap; max-width: 100%; gap: 0; } /* every colour is shown; rows wrap inside the card */
+.fervoro-swatch { display: inline-grid; place-items: center; flex: none; width: var(--sw, 28px); height: var(--sw, 28px); border-radius: 50%; }
+.fervoro-swatch span { width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18); }
+.fervoro-swatch[aria-pressed='true'] { box-shadow: inset 0 0 0 1px var(--color-forest-900); }
+.fervoro-swatches.is-large { flex-wrap: wrap; max-width: 100%; }
+.fervoro-swatches.is-large .fervoro-swatch { --sw: 36px; }
+.fervoro-swatches.is-large .fervoro-swatch span { width: 22px; height: 22px; }
+
+/* Listing layout: sticky filter sidebar (desktop) + product column */
+.fervoro-plp-layout { margin-top: clamp(18px, 2.4vw, 40px); }
+.fervoro-plp-layout .fervoro-plp-bar { margin-top: 0; }
+.fervoro-plp-main { min-width: 0; }
+@media (min-width: 1024px) {
+  .fervoro-plp-layout { display: grid; grid-template-columns: clamp(240px, 19vw, 280px) minmax(0, 1fr); gap: 0 clamp(24px, 2.6vw, 48px); align-items: start; }
+  .fervoro-plp-side {
+    position: sticky; top: calc(var(--header-row) + 16px); align-self: start;
+    max-height: calc(100dvh - var(--header-row) - 32px); overflow-y: auto; overscroll-behavior: contain;
+    padding-right: clamp(16px, 1.6vw, 28px); border-right: 1px solid var(--color-ivory-200); background: #fff;
+    scrollbar-width: thin;
+  }
+}
+.fervoro-plp-side-head { display: flex; align-items: center; justify-content: space-between; min-height: 44px; border-bottom: 1px solid var(--color-ivory-200); }
+.fervoro-plp-side-head h2 { font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.fervoro-plp-side-clear { min-height: 44px; padding: 0 2px; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.fervoro-plp-side-clear:disabled { opacity: 0.4; cursor: default; text-decoration: none; }
+
+/* Filter accordion (sidebar + drawer) */
+.fervoro-fa-item { border-bottom: 1px solid var(--color-ivory-200); }
+.fervoro-fa-h { margin: 0; font-size: inherit; }
+.fervoro-fa-btn { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 48px; text-align: left; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-forest-900); }
+.fervoro-fa-btn > span:first-child { flex: 1; }
+.fervoro-fa-sel { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; font-size: 11px; letter-spacing: 0; color: #fff; background: var(--color-forest-900); border-radius: 9px; }
+.fervoro-fa-chev { width: 8px; height: 8px; margin-right: 4px; border: solid var(--color-forest-700); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg) translateY(-2px); transition: transform 0.25s ease; }
+.fervoro-fa-item[data-open='false'] .fervoro-fa-chev { transform: rotate(-45deg); }
+.fervoro-fa-body { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows 0.25s ease, visibility 0s linear 0.25s; }
+.fervoro-fa-item[data-open='true'] .fervoro-fa-body { grid-template-rows: 1fr; visibility: visible; transition-delay: 0s; }
+.fervoro-fa-inner { min-height: 0; overflow: hidden; }
+.fervoro-fa-inner ul { padding: 0 0 14px; }
+.fervoro-fa-link { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 14px; color: var(--color-forest-700); text-decoration: none; }
+.fervoro-fa-link:hover { color: var(--color-forest-900); }
+.fervoro-fa-link[aria-current='page'] { color: var(--color-forest-900); font-weight: 600; }
+.fervoro-fa-link[aria-current='page'] .fervoro-check-label { text-decoration: underline; text-underline-offset: 4px; }
+.fervoro-fa .fervoro-check:hover .fervoro-check-label { color: var(--color-forest-950); }
+.fervoro-filter-body .fervoro-fa-btn { padding-right: 0; }
+
+/* Filter drawer (modal <dialog>) */
+.fervoro-filter { margin: 0; padding: 0; width: min(380px, 100vw); max-width: 100vw; height: 100dvh; max-height: 100dvh; border: 0; background: #fff; color: var(--color-forest-900); }
+.fervoro-filter::backdrop { background: rgb(13 38 33 / 0.45); }
+.fervoro-filter[open] { animation: fervoro-slide-in 0.28s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes fervoro-slide-in { from { transform: translateX(-24px); opacity: 0; } to { transform: none; opacity: 1; } }
+.fervoro-filter-panel { display: flex; flex-direction: column; height: 100%; }
+.fervoro-filter-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 8px 8px 24px; border-bottom: 1px solid var(--color-ivory-200); }
+.fervoro-filter-head h2 { font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+.fervoro-filter-x { display: grid; place-items: center; width: 44px; height: 44px; }
+.fervoro-filter-x svg { width: 22px; height: 22px; }
+.fervoro-filter-body { flex: 1; overflow-y: auto; padding: 8px 24px 24px; }
+.fervoro-filter-set { margin: 0; padding: 18px 0 8px; border: 0; }
+.fervoro-filter-set legend { padding: 0; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.fervoro-check { position: relative; display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; font-size: 14px; }
+.fervoro-check input { position: absolute; opacity: 0; width: 20px; height: 20px; margin: 0; }
+.fervoro-check-box { display: grid; place-items: center; flex: none; width: 20px; height: 20px; border: 1px solid var(--color-forest-500); color: transparent; }
+.fervoro-check-box svg { width: 14px; height: 14px; }
+.fervoro-check input:checked + .fervoro-check-box { color: #fff; background: var(--color-forest-900); border-color: var(--color-forest-900); }
+.fervoro-check input:focus-visible + .fervoro-check-box { outline: 2px solid var(--color-forest-700); outline-offset: 2px; }
+.fervoro-check-dot { flex: none; width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.18); }
+.fervoro-check-label { flex: 1; }
+.fervoro-check-count { font-size: 12.5px; color: var(--color-forest-500); font-variant-numeric: tabular-nums; }
+.fervoro-filter-foot { display: flex; gap: 12px; padding: 16px 24px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--color-ivory-200); }
+.fervoro-filter-clear { min-height: 48px; padding: 0 8px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.fervoro-filter-clear:disabled { opacity: 0.4; cursor: default; }
+.fervoro-filter-apply { flex: 1; min-height: 48px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #fff; background: var(--color-forest-900); }
+.fervoro-filter-apply:hover { background: var(--color-forest-950); }
+
+.fervoro-notfound { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: clamp(72px, 12vw, 200px) var(--shop-pad); text-align: center; background: #fff; }
+.fervoro-notfound h1 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(1.75rem, 3vw, 2.75rem); }
+.fervoro-notfound p { margin: 0 0 12px; color: var(--color-forest-700); }
+
+/* ───────────── Shop: product detail (/product/:slug) ───────────── */
+.fervoro-pdp { background: #fff; }
+.fervoro-pdp-gallery { position: relative; min-width: 0; }
+.fervoro-pdp-slides { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.fervoro-pdp-slides::-webkit-scrollbar { display: none; }
+.fervoro-pdp-slide { flex: 0 0 100%; aspect-ratio: 3 / 4; scroll-snap-align: start; scroll-snap-stop: always; background: var(--color-ivory-200); }
+.fervoro-pdp-zoom { display: block; width: 100%; height: 100%; cursor: zoom-in; }
+.fervoro-pdp-slide img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
+.fervoro-pdp-pager { position: absolute; left: 0; right: 0; bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 6px; pointer-events: none; }
+.fervoro-pdp-pager button, .fervoro-pdp-pager span { pointer-events: auto; }
+.fervoro-pdp-pager button { display: grid; place-items: center; width: 44px; height: 44px; color: var(--color-forest-900); background: rgb(255 255 255 / 0.9); border-radius: 50%; }
+.fervoro-pdp-pager button svg { width: 20px; height: 20px; }
+.fervoro-pdp-pager button[aria-disabled='true'] { opacity: 0.35; }
+.fervoro-pdp-pager span { min-width: 56px; padding: 6px 10px; font-size: 12.5px; text-align: center; font-variant-numeric: tabular-nums; background: rgb(255 255 255 / 0.9); border-radius: 14px; }
+
+.fervoro-pdp-panel { padding: 20px var(--shop-pad) 0; }
+.fervoro-pdp-crumbs ol { display: flex; flex-wrap: wrap; gap: 2px 0; font-size: 12px; color: var(--color-forest-500); }
+.fervoro-pdp-crumbs li + li::before { content: '/'; margin: 0 8px; }
+.fervoro-pdp-crumbs a { color: inherit; text-decoration: none; }
+.fervoro-pdp-crumbs a:hover { color: var(--color-forest-900); text-decoration: underline; text-underline-offset: 3px; }
+.fervoro-pdp-title { margin-top: 16px; font-family: var(--font-serif); font-weight: 400; font-size: clamp(1.6rem, 2.2vw, 2.4rem); line-height: 1.1; }
+.fervoro-pdp-price { margin: 10px 0 0; font-size: 15px; font-variant-numeric: tabular-nums; }
+.fervoro-pdp-note { margin: 6px 0 0; font-size: 12px; font-style: italic; color: var(--color-forest-500); }
+.fervoro-pdp-block { margin-top: 26px; }
+.fervoro-pdp-label { margin: 0 0 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.fervoro-pdp-label span { font-weight: 400; letter-spacing: 0; text-transform: none; }
+h2.fervoro-pdp-label { font-size: 12px; }
+.fervoro-pdp-sizehead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.fervoro-pdp-guide { min-height: 32px; font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; }
+.fervoro-pdp-guide:disabled { color: var(--color-forest-500); text-decoration: none; cursor: not-allowed; }
+.fervoro-pdp-unavailable { margin: 0; padding: 14px 16px; font-size: 13.5px; line-height: 1.5; color: var(--color-forest-700); background: var(--color-ivory-50); border: 1px dashed var(--color-ivory-300); }
+.fervoro-pdp-sizes { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid var(--color-ivory-300); }
+.fervoro-pdp-sizes label { position: relative; display: grid; place-items: center; min-height: 48px; cursor: pointer; border-left: 1px solid var(--color-ivory-300); }
+.fervoro-pdp-sizes label:first-child { border-left: 0; }
+.fervoro-pdp-sizes input { position: absolute; opacity: 0; inset: 0; }
+.fervoro-pdp-sizes input:checked + span { font-weight: 700; }
+.fervoro-pdp-sizes input:disabled + span { color: var(--color-ivory-300); text-decoration: line-through; }
+.fervoro-pdp-buy { display: flex; gap: 8px; margin-top: 26px; }
+.fervoro-pdp-add { flex: 1; min-height: 52px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #fff; background: var(--color-forest-900); }
+.fervoro-pdp-add:hover:not(:disabled) { background: var(--color-forest-950); }
+.fervoro-pdp-add:disabled { color: var(--color-forest-500); background: var(--color-ivory-100); cursor: not-allowed; }
+.fervoro-pdp-heart { flex: none; width: 52px; height: 52px; border: 1px solid var(--color-forest-900); }
+.fervoro-pdp-desc p { margin: 0; font-size: 14.5px; line-height: 1.65; color: var(--color-forest-700); }
+.fervoro-pdp-details { margin-top: 22px; border-top: 1px solid var(--color-ivory-200); border-bottom: 1px solid var(--color-ivory-200); }
+.fervoro-pdp-details summary { display: flex; align-items: center; justify-content: space-between; min-height: 52px; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; list-style: none; }
+.fervoro-pdp-details summary::-webkit-details-marker { display: none; }
+.fervoro-pdp-details summary::after { content: '+'; font-size: 18px; font-weight: 400; }
+.fervoro-pdp-details[open] summary::after { content: '−'; }
+.fervoro-pdp-details > :not(summary) { margin-bottom: 16px; }
+
+/* Mobile / tablet: photographs first, details below; the buy row sticks to the bottom of the panel while it is on screen. */
+@media (max-width: 1023px) {
+  .fervoro-pdp-buy { position: sticky; bottom: 0; z-index: 3; margin: 26px calc(-1 * var(--shop-pad)) 0; padding: 12px var(--shop-pad) calc(12px + env(safe-area-inset-bottom)); background: #fff; border-top: 1px solid var(--color-ivory-200); }
+  .fervoro-pdp-panel { padding-bottom: 32px; }
+}
+@media (min-width: 640px) and (max-width: 1023px) { .fervoro-pdp-gallery, .fervoro-pdp-panel { max-width: 640px; margin-inline: auto; } .fervoro-pdp-gallery { width: 100%; } }
+@media (min-width: 1024px) {
+  .fervoro-pdp { display: grid; grid-template-columns: minmax(0, 3fr) minmax(360px, 2fr); align-items: start; }
+  .fervoro-pdp-slides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px; overflow: visible; }
+  .fervoro-pdp-slides[data-count='1'] { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+  .fervoro-pdp-slide { flex: none; }
+  .fervoro-pdp-pager { display: none; }
+  .fervoro-pdp-panel { position: sticky; top: var(--header-row); padding: clamp(32px, 4vw, 72px) clamp(24px, 4vw, 80px) 40px; max-width: 640px; }
+  .fervoro-pdp-buy { margin-top: 28px; }
+}
+
+/* Photo viewer */
+.fervoro-zoom { margin: 0; padding: 0; width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; border: 0; background: #fff; }
+.fervoro-zoom::backdrop { background: #fff; }
+.fervoro-zoom-inner { position: relative; display: grid; place-items: center; width: 100%; height: 100%; padding: 56px 16px; }
+.fervoro-zoom-inner img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; }
+.fervoro-zoom-x { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 44px; height: 44px; }
+.fervoro-zoom-x svg { width: 24px; height: 24px; }
+.fervoro-zoom-nav { position: absolute; top: 50%; display: grid; place-items: center; width: 48px; height: 48px; margin-top: -24px; }
+.fervoro-zoom-nav svg { width: 26px; height: 26px; }
+.fervoro-zoom-nav.is-prev { left: 8px; }
+.fervoro-zoom-nav.is-next { right: 8px; }
+.fervoro-zoom-count { position: absolute; left: 0; right: 0; bottom: 14px; margin: 0; font-size: 12.5px; text-align: center; color: var(--color-forest-500); font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fervoro-filter[open] { animation: none; }
+  .fervoro-fa-body, .fervoro-fa-chev { transition: none; }
+  .fervoro-plp-arrow, .fervoro-heart svg, .fervoro-plp-tab { transition: none; }
+}
+.fervoro-eyebrow-link { color: inherit; text-decoration: none; }
+.fervoro-eyebrow-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.fervoro-pcard { position: relative; }
+.fervoro-pcard-link { color: inherit; text-decoration: none; }
+.fervoro-pcard-link::after { content: ''; position: absolute; inset: 0; }
+.fervoro-pcard-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+.fervoro-pcard-link:focus-visible { outline: none; }
+.fervoro-pcard-link:focus-visible::after { outline: 2px solid var(--color-forest-700); outline-offset: 2px; }
+
+
+/* ───────────── Header: wishlist / bag counts ───────────── */
+.fervoro-util-wrap { position: relative; display: grid; place-items: center; }
+.fervoro-util-icon[data-filled='true'] path { fill: currentColor; }
+.fervoro-util-badge { position: absolute; top: -7px; right: -9px; display: grid; place-items: center; min-width: 17px; height: 17px; padding: 0 4px; font-size: 10.5px; font-weight: 600; line-height: 1; color: #fff; background: var(--color-forest-900); border-radius: 9px; font-variant-numeric: tabular-nums; }
+.fervoro-util-btn[aria-current='page'] .fervoro-util-icon { opacity: 0.6; }
+
+/* ───────────── Product page: back + breadcrumb bar ───────────── */
+.fervoro-pdp-topbar { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 16px; padding: 10px var(--shop-pad); border-bottom: 1px solid var(--color-ivory-200); }
+.fervoro-pdp-back { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding-right: 4px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-forest-900); }
+.fervoro-pdp-back:hover { text-decoration: underline; text-underline-offset: 4px; }
+.fervoro-pdp-topbar .fervoro-pdp-crumbs a { display: inline-block; padding: 12px 0; } /* 44px-high touch target */
+@media (min-width: 1024px) { .fervoro-pdp-topbar { grid-column: 1 / -1; } }
+.fervoro-pdp-status { min-height: 1.4em; margin-top: 8px; }
+.fervoro-pdp-status a { text-decoration: underline; text-underline-offset: 3px; }
+.fervoro-pdp-add[disabled] { cursor: not-allowed; }
+
+/* ───────────── Wishlist · Bag · Search · Account pages ───────────── */
+.fervoro-page-sub { margin: 10px 0 0; font-size: 14px; color: var(--color-forest-700); }
+.fervoro-search .fervoro-plp-head { margin-bottom: 24px; }
+.fervoro-search-form { margin-top: 18px; max-width: 560px; }
+.fervoro-search-form input { width: 100%; min-height: 52px; padding: 0 16px; font-size: 16px; color: var(--color-forest-900); background: #fff; border: 1px solid var(--color-forest-900); border-radius: 0; }
+.fervoro-search-form input:focus-visible { outline: 2px solid var(--color-forest-700); outline-offset: 2px; }
+.fervoro-bag-layout { display: grid; gap: 32px; }
+@media (min-width: 1024px) { .fervoro-bag-layout { grid-template-columns: minmax(0, 1fr) 380px; align-items: start; gap: 56px; } }
+.fervoro-bag-lines { margin: 24px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--color-ivory-200); }
+.fervoro-bag-line { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--color-ivory-200); }
+@media (min-width: 640px) { .fervoro-bag-line { grid-template-columns: 132px minmax(0, 1fr); gap: 24px; } }
+.fervoro-bag-thumb { display: block; aspect-ratio: 3 / 4; background: var(--color-ivory-200); }
+.fervoro-bag-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.fervoro-bag-name { margin: 0; font-size: 15px; font-weight: 500; }
+.fervoro-bag-name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.fervoro-bag-meta, .fervoro-bag-price { margin: 6px 0 0; font-size: 13.5px; color: var(--color-forest-700); }
+.fervoro-bag-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; margin-top: 14px; }
+.fervoro-qty { display: inline-flex; align-items: center; border: 1px solid var(--color-forest-900); }
+.fervoro-qty button { width: 44px; height: 44px; font-size: 18px; }
+.fervoro-qty button:disabled { opacity: 0.35; cursor: not-allowed; }
+.fervoro-qty output { min-width: 36px; text-align: center; font-variant-numeric: tabular-nums; }
+.fervoro-bag-remove { min-height: 44px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.fervoro-bag-summary { padding: 24px; background: var(--color-ivory-50); }
+@media (min-width: 1024px) { .fervoro-bag-summary { position: sticky; top: calc(var(--header-row) + 16px); } }
+.fervoro-bag-total { display: flex; justify-content: space-between; gap: 12px; margin: 16px 0 8px; font-size: 15px; }
+.fervoro-bag-summary .fervoro-pdp-add { width: 100%; margin-top: 12px; }
+.fervoro-bag-continue { display: inline-block; margin-top: 16px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.fervoro-account-list { max-width: 560px; margin: 24px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--color-ivory-200); }
+.fervoro-account-list a { display: flex; flex-direction: column; gap: 4px; min-height: 64px; justify-content: center; padding: 12px 0; font-size: 15px; font-weight: 500; border-bottom: 1px solid var(--color-ivory-200); }
+.fervoro-account-list a span { font-size: 13px; font-weight: 400; color: var(--color-forest-700); }
+.fervoro-account-list a:hover { background: var(--color-ivory-50); }
